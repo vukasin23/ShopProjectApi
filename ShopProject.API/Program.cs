@@ -21,3 +21,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
+//Komande za git 
+
+//Git status, git add ., git commit -m "poruka", git push 
