@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopProject.Application
+namespace ShopProject.API.Core
 {
     public interface ITokenStorage
     {

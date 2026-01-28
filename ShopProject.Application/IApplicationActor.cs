@@ -4,7 +4,15 @@ using System.Text;
 
 namespace ShopProject.Application
 {
-    internal interface IApplicationActor
+    public interface IApplicationActor
     {
+        int Id { get; }
+        string FirstName { get; }
+
+        string LastName { get; }
+
+        string Email { get; }
+
+        IEnumerable<int> AllowedUseCases { get; }
     }
 }

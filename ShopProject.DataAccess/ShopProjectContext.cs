@@ -8,9 +8,19 @@ namespace ShopProject.DataAccess
 {
     public class ShopProjectContext:DbContext
     {
+        private readonly string _connectionString;
+        public ShopProjectContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public ShopProjectContext()
+        {
+            _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopProject;Integrated Security=True";
+        }
         protected override void OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopProject;Integrated Security=True");
+            optionsBuilder.UseSqlServer(_connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

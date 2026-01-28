@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ShopProject.Application
 {
-    internal interface IApplicationActorProvider
+    public interface IApplicationActorProvider
     {
+        IApplicationActor GetActor();
     }
 }

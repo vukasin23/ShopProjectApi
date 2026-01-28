@@ -6,5 +6,6 @@ namespace ShopProject.Application
 {
     public interface IErrorLogger
     {
+        void Log(Exception ex);
     }
 }

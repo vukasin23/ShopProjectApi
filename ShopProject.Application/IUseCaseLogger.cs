@@ -6,5 +6,6 @@ namespace ShopProject.Application
 {
     public interface IUseCaseLogger
     {
+        void Log(IApplicationActor actor, IUseCase useCase, object data);
     }
 }
