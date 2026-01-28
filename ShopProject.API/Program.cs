@@ -16,15 +16,14 @@ builder.Services.AddSingleton(settings.Jwt);
 
 builder.Services.AddTransient<ShopProjectContext>(x => new ShopProjectContext(settings.ConnectionString));
 
-
-
+builder.Services.AddUseCases();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ITokenStorage, InMemoryTokenStorage>();
 
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
 {
     var accessor = x.GetService<IHttpContextAccessor>();
-
-    var request = accessor.HttpContext.Request;
+    var request = accessor.HttpContext?.Request;
 
     var authHeader = request.Headers.Authorization.ToString();
 
@@ -34,7 +33,7 @@ builder.Services.AddTransient<IApplicationActorProvider>(x =>
 });
 builder.Services.AddTransient<IApplicationActor>(x =>
 {
-    var accessor = x.GetService<IHttpContextAccessor>();
+    var accessor = x.GetRequiredService<IHttpContextAccessor>();
     if (accessor.HttpContext == null)
     {
         return new UnauthorizedActor();
@@ -73,7 +72,7 @@ builder.Services.AddAuthentication(options =>
 
             Guid tokenId = context.HttpContext.Request.GetTokenId().Value;
 
-            var storage = builder.Services.BuildServiceProvider().GetService<ITokenStorage>();
+            var storage = context.HttpContext.RequestServices.GetRequiredService<ITokenStorage>();
 
             if (!storage.Exists(tokenId))
             {
@@ -101,7 +100,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

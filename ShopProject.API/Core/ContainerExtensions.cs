@@ -1,4 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using ShopProject.Application.Command;
+using ShopProject.Implementation;
+using ShopProject.Implementation.Command;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ShopProject.API.Core
 {
@@ -7,6 +10,8 @@ namespace ShopProject.API.Core
         public static void AddUseCases(this IServiceCollection services)
         {
             //Ovde ce ici svi use case-ovi
+            services.AddTransient<UseCaseHandler>();
+            services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

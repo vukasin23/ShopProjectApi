@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ShopProject.Application\ShopProject.Application.csproj" />
     <ProjectReference Include="..\ShopProject.DataAccess\ShopProject.DataAccess.csproj" />
     <ProjectReference Include="..\ShopProject.Implementation\ShopProject.Implementation.csproj" />

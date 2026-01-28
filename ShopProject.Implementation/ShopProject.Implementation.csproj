@@ -12,4 +12,16 @@
     <ProjectReference Include="..\ShopProject.Domain\ShopProject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logging\Errors\" />
+    <Folder Include="Logging\UseCases\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Query\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+  </ItemGroup>
+
 </Project>

@@ -16,32 +16,44 @@ namespace ShopProject.API.Core
 
         public IApplicationActor GetActor()
         {
+            Console.WriteLine("Ovo je header:" + authorizationHeader);
+            if(string.IsNullOrEmpty(authorizationHeader) || string.IsNullOrWhiteSpace(authorizationHeader))
+            {
+                return new UnauthorizedActor();
+            }
             if (authorizationHeader.Split("Bearer ").Length != 2)
             {
                 return new UnauthorizedActor();
             }
-
-            string token = authorizationHeader.Split("Bearer ")[1];
-
-            var handler = new JwtSecurityTokenHandler();
-
-            var tokenObj = handler.ReadJwtToken(token);
-
-            var claims = tokenObj.Claims;
-
-            var claim = claims.First(x => x.Type == "jti").Value;
-
-            var actor = new Actor
+            try
             {
-                Email = claims.First(x => x.Type == "Username").Value,
-                Username = claims.First(x => x.Type == "Username").Value,
-                FirstName = claims.First(x => x.Type == "FirstName").Value,
-                LastName = claims.First(x => x.Type == "LastName").Value,
-                Id = int.Parse(claims.First(x => x.Type == "Id").Value),
-                AllowedUseCases = JsonConvert.DeserializeObject<List<int>>(claims.First(x => x.Type == "UseCaseIds").Value)
-            };
+                string token = authorizationHeader.Split("Bearer ")[1];
 
-            return actor;
+                var handler = new JwtSecurityTokenHandler();
+
+                var tokenObj = handler.ReadJwtToken(token);
+
+                var claims = tokenObj.Claims;
+
+                var claim = claims.First(x => x.Type == "jti").Value;
+
+                var actor = new Actor
+                {
+                    Email = claims.First(x => x.Type == "Email").Value,
+                    Username = claims.First(x => x.Type == "Username").Value,
+                    FirstName = claims.First(x => x.Type == "FirstName").Value,
+                    LastName = claims.First(x => x.Type == "LastName").Value,
+                    Id = int.Parse(claims.First(x => x.Type == "Id").Value),
+                    AllowedUseCases = JsonConvert.DeserializeObject<List<int>>(claims.First(x => x.Type == "UseCaseIds").Value)
+                };
+
+                return actor;
+            }
+            catch
+            {
+                return new UnauthorizedActor(); 
+            }
+           
         }
     }
 }
