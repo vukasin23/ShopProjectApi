@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Command\" />
+    <Folder Include="DataTransfer\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Searches\" />
+    <Folder Include="Query\" />
+  </ItemGroup>
+
 </Project>

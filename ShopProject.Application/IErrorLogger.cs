@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopProject.Application
 {
-    internal interface IErrorLogger
+    public interface IErrorLogger
     {
     }
 }
