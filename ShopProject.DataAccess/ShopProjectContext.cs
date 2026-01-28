@@ -30,6 +30,7 @@ namespace ShopProject.DataAccess
                 .WithMany(uc => uc.Users)
                 .UsingEntity(j => j.ToTable("UserUseCases"));
 
+
             modelBuilder.Entity<Category>()
                     .HasOne(c => c.Parent)
                     .WithMany(c => c.Children)
@@ -45,6 +46,12 @@ namespace ShopProject.DataAccess
             modelBuilder.Entity<Cart>()
                     .HasIndex(c => c.UserId)
                     .IsUnique();
+
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Cart)
+                .WithOne(c => c.User)
+                .HasForeignKey<Cart>(c => c.UserId);
         }
 
         public DbSet<User> Users { get; set; }

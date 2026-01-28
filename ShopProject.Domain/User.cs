@@ -19,7 +19,6 @@ namespace ShopProject.Domain
 
         public ICollection<WishlistItem> WishlistItems { get; set; }  
         public Cart Cart { get; set; }
-        public int CartId { get; set; } 
         public ICollection<Order> Orders { get; set; }  
 
 
