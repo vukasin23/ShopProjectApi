@@ -12,6 +12,7 @@ namespace ShopProject.API.Core
             //Ovde ce ici svi use case-ovi
             services.AddTransient<UseCaseHandler>();
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            services.AddTransient<JwtTokenCreator>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)
