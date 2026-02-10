@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
-    <Folder Include="Searches\" />
     <Folder Include="Query\" />
+    <Folder Include="Searches\" />
   </ItemGroup>
 
 </Project>
