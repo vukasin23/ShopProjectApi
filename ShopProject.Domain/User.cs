@@ -24,6 +24,7 @@ namespace ShopProject.Domain
 
         public ICollection<Address> Addresses { get; set; } 
 
+        public ICollection<UseCaseLog> usecaseLogs { get; set; }
 
     }
 }

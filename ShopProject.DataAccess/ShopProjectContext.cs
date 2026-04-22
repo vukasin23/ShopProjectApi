@@ -70,5 +70,7 @@ namespace ShopProject.DataAccess
         public DbSet<WishlistItem> WishlistItems{ get; set; }
         public DbSet<ShippingMethod> ShippingMethods{ get; set; }
         public DbSet<Address> Addresses { get; set; }
-        }
+
+        public DbSet<UseCaseLog> UseCaseLogs { get; set; }
+    }
 }
