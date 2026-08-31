@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using Microsoft.Identity.Client.Extensions.Msal;
 using ShopProject.API.Core;
 using ShopProject.API.DTO;
 
@@ -11,25 +13,13 @@ namespace ShopProject.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly ITokenStorage _storage;
         private readonly JwtTokenCreator _jwtTokenCreator;
 
-        public AuthController(JwtTokenCreator jwtTokenCreator)
+        public AuthController(JwtTokenCreator jwtTokenCreator, ITokenStorage storage)
         {
             _jwtTokenCreator = jwtTokenCreator;
-        }
-
-        // GET: api/<AuthController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AuthController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            _storage = storage;
         }
 
         // POST api/<AuthController>
@@ -41,16 +31,23 @@ namespace ShopProject.API.Controllers
             return Ok(new AuthResponse { Token = _token });
         }
 
-        // PUT api/<AuthController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        [Authorize]
+        [HttpDelete]
+        public IActionResult Logout()
         {
+
+            var tokenId = Request.GetTokenId();
+
+            if (tokenId == null)
+            {
+                return Unauthorized();
+            }
+
+            _storage.Remove(tokenId.Value);
+
+            return NoContent();
         }
 
-        // DELETE api/<AuthController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

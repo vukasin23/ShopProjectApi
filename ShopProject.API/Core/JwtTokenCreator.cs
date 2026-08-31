@@ -55,6 +55,7 @@ namespace ShopProject.API.Core
                  new Claim("FirstName", user.FirstName),
                  new Claim("LastName", user.LastName),
                  new Claim("Id", user.Id.ToString()),
+                 new Claim("Email", email),
                  new Claim("UseCaseIds", JsonConvert.SerializeObject(user.UseCaseIds)),
             };
 

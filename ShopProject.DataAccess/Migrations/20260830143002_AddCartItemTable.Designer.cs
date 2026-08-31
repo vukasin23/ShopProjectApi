@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopProject.DataAccess;
 
@@ -11,9 +12,11 @@ using ShopProject.DataAccess;
 namespace ShopProject.DataAccess.Migrations
 {
     [DbContext(typeof(ShopProjectContext))]
-    partial class ShopProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20260830143002_AddCartItemTable")]
+    partial class AddCartItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Cart", b =>
@@ -88,7 +91,7 @@ namespace ShopProject.DataAccess.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.CartItem", b =>
@@ -117,7 +120,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Category", b =>
@@ -143,7 +146,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Coupon", b =>
@@ -166,7 +169,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coupons", (string)null);
+                    b.ToTable("Coupons");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Inventory", b =>
@@ -195,7 +198,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.ToTable("Inventories", (string)null);
+                    b.ToTable("Inventories");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Order", b =>
@@ -233,7 +236,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.OrderLine", b =>
@@ -262,7 +265,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderLines", (string)null);
+                    b.ToTable("OrderLines");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Product", b =>
@@ -291,7 +294,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.ProductImage", b =>
@@ -320,7 +323,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.ProductSpecification", b =>
@@ -346,7 +349,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductSpecifications", (string)null);
+                    b.ToTable("ProductSpecifications");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.ShippingMethod", b =>
@@ -370,7 +373,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingMethods", (string)null);
+                    b.ToTable("ShippingMethods");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Store", b =>
@@ -405,7 +408,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Stores", (string)null);
+                    b.ToTable("Stores");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.UseCase", b =>
@@ -426,7 +429,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UseCases", (string)null);
+                    b.ToTable("UseCases");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.UseCaseLog", b =>
@@ -463,7 +466,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("UseCaseLogs", (string)null);
+                    b.ToTable("UseCaseLogs");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.User", b =>
@@ -500,7 +503,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ShopProject.Domain.WishlistItem", b =>
@@ -526,7 +529,7 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WishlistItems", (string)null);
+                    b.ToTable("WishlistItems");
                 });
 
             modelBuilder.Entity("UseCaseUser", b =>

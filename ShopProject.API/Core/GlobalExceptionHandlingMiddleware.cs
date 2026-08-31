@@ -1,18 +1,18 @@
 ﻿using ShopProject.Application;
-using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace ShopProject.API.Core
 {
     public class GlobalExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        private IErrorLogger _logger;
+        //private IErrorLogger _logger;
         private IApplicationActor _actor;
 
-        public GlobalExceptionHandlingMiddleware(RequestDelegate next, IErrorLogger logger, IApplicationActor actor)
+        public GlobalExceptionHandlingMiddleware(RequestDelegate next, IApplicationActor actor)
         {
             _next = next;
-            _logger = logger;
+            //_logger = logger;
             _actor = actor;
         }
 
@@ -30,14 +30,14 @@ namespace ShopProject.API.Core
                     return;
                 }
 
-                //if (exception is ValidationException ex)
-                //{
-                //    httpContext.Response.StatusCode = 422;
-                //    var body = ex.Errors.Select(x => new { Property = x.PropertyName, Error = x.ErrorMessage });
+                if (exception is ValidationException ex)
+                {
+                    httpContext.Response.StatusCode = 422;
+                    var body = ex.Errors.Select(x => new { Property = x.PropertyName, Error = x.ErrorMessage });
 
-                //    await httpContext.Response.WriteAsJsonAsync(body);
-                //    return;
-                //}
+                    await httpContext.Response.WriteAsJsonAsync(body);
+                    return;
+                }
 
                 //if (exception is EntityNotFoundException)
                 //{
@@ -54,10 +54,10 @@ namespace ShopProject.API.Core
                 //    return;
                 //}
 
-                var errorId = _logger.Log(exception, _actor);
+                //var errorId = _logger.Log(exception, _actor);
 
                 httpContext.Response.StatusCode = 500;
-                await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - {errorId}." });
+                await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - ." });
             }
         }
     }

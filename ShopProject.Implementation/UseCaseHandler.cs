@@ -21,7 +21,7 @@ namespace ShopProject.Implementation
 
         public void HandleCommand<TRequest>(ICommand<TRequest> command, TRequest request)
         {
-            HandleActorUseCase(command);
+            //HandleActorUseCase(command);
             //_logger.Log(_actor, command, request);
             command.Execute(request);
         }

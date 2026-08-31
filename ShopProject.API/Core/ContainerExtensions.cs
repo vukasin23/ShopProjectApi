@@ -1,6 +1,7 @@
 ﻿using ShopProject.Application.Command;
 using ShopProject.Implementation;
 using ShopProject.Implementation.Command;
+using ShopProject.Implementation.Validators;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace ShopProject.API.Core
@@ -12,6 +13,9 @@ namespace ShopProject.API.Core
             //Ovde ce ici svi use case-ovi
             services.AddTransient<UseCaseHandler>();
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
+
+            services.AddTransient<CreateCategoryValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 

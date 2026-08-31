@@ -15,7 +15,6 @@ builder.Configuration.Bind(settings);
 builder.Services.AddSingleton(settings.Jwt);
 
 builder.Services.AddTransient<ShopProjectContext>(x => new ShopProjectContext(settings.ConnectionString));
-
 builder.Services.AddUseCases();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<ITokenStorage, InMemoryTokenStorage>();
@@ -92,7 +91,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

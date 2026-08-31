@@ -9,44 +9,43 @@ namespace ShopProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly UseCaseHandler _handler;
 
-        public UserController(UseCaseHandler handler)
+        public CategoryController(UseCaseHandler handler)
         {
             _handler = handler;
         }
-
-        // GET: api/<UserController>
+        // GET: api/<CategoryController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<UserController>/5
+        // GET api/<CategoryController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<UserController>
+        // POST api/<CategoryController>
         [HttpPost]
-        public IActionResult Post([FromBody] RegisterUserDto request, [FromServices] IRegisterUserCommand command)
+        public IActionResult Post([FromBody] CategoryDto category, [FromServices] ICreateCategoryCommand command)
         {
-            _handler.HandleCommand(command, request);
+            _handler.HandleCommand(command, category);
             return Ok();
         }
 
-        // PUT api/<UserController>/5
+        // PUT api/<CategoryController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<CategoryController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

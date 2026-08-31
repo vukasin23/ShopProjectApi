@@ -11,6 +11,9 @@ namespace ShopProject.Implementation.Command
 {
     public class EfRegisterUserCommand : IRegisterUserCommand
     {
+        public int Id => 2;
+
+        public string Name => "Register user using EF";
         private readonly ShopProjectContext _context;
 
         public EfRegisterUserCommand(ShopProjectContext context)
@@ -18,9 +21,7 @@ namespace ShopProject.Implementation.Command
             _context = context;
         }
 
-        public int Id => 2;
 
-        public string Name => "Register user";
 
         public void Execute(RegisterUserDto request)
         {
