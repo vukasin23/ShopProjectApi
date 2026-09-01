@@ -4,4 +4,5 @@
   <Project Path="ShopProject.DataAccess/ShopProject.DataAccess.csproj" />
   <Project Path="ShopProject.Domain/ShopProject.Domain.csproj" />
   <Project Path="ShopProject.Implementation/ShopProject.Implementation.csproj" />
+  <Project Path="ShopProject.Tests/ShopProject.Tests.csproj" Id="4dcf0c7d-ce47-4fc7-9cd2-84ce5db96338" />
 </Solution>

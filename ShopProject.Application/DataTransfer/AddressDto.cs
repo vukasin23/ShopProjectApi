@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopProject.Application.DataTransfer
 {
-    internal class UsecaseDto
+    internal class AddressDto
     {
     }
 }

@@ -12,10 +12,15 @@ namespace ShopProject.API.Core
         {
             //Ovde ce ici svi use case-ovi
             services.AddTransient<UseCaseHandler>();
+
+            //Commands
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
+            services.AddTransient<ICreateStoreCommand, EfCreateStoreCommand>();
 
+            //Validators
             services.AddTransient<CreateCategoryValidator>();
+            services.AddTransient<CreateStoreValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 
