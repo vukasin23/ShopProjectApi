@@ -1,83 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ShopProject.Application.Command;
+using ShopProject.Application.DataTransfer;
+using ShopProject.Implementation;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ShopProject.API.Controllers
 {
-    public class AddressController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AddressController : ControllerBase
     {
-        // GET: AddressController
-        public ActionResult Index()
+        private readonly UseCaseHandler _handler;
+
+        public AddressController(UseCaseHandler handler)
         {
-            return View();
+            _handler = handler;
         }
 
-        // GET: AddressController/Details/5
-        public ActionResult Details(int id)
+        // GET: api/<AddressController>
+        [HttpGet]
+        public IEnumerable<string> Get()
         {
-            return View();
+            return new string[] { "value1", "value2" };
         }
 
-        // GET: AddressController/Create
-        public ActionResult Create()
+        // GET api/<AddressController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
         {
-            return View();
+            return "value";
         }
 
-        // POST: AddressController/Create
+        // POST api/<AddressController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Post([FromBody] AddressDto request, [FromServices] ICreateAddressCommand command)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _handler.HandleCommand(command, request);
+            return Ok();
         }
 
-        // GET: AddressController/Edit/5
-        public ActionResult Edit(int id)
+        // PUT api/<AddressController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-            return View();
         }
 
-        // POST: AddressController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<AddressController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: AddressController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AddressController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

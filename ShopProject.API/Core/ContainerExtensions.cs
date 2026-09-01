@@ -17,10 +17,13 @@ namespace ShopProject.API.Core
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
             services.AddTransient<ICreateStoreCommand, EfCreateStoreCommand>();
+            services.AddTransient<ICreateAddressCommand, EfCreateAddressCommand>();
 
+            //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
             services.AddTransient<CreateStoreValidator>();
+            services.AddTransient<CreateAddressValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 

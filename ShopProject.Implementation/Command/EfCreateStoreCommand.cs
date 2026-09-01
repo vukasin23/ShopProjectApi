@@ -20,7 +20,7 @@ namespace ShopProject.Implementation.Command
             _context = context;
             _validator = validator;
         }
-        public int Id => 5;
+        public int Id => 4;
         public string Name => "Create Store using EF";
         public void Execute(StoreDto request)
         {

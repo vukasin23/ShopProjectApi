@@ -29,7 +29,7 @@ namespace ShopProject.Tests.Validators
 
             var result = validator.TestValidate(dto);
 
-            result  .ShouldHaveValidationErrorFor(x => x.Phone);
+            result.ShouldHaveValidationErrorFor(x => x.Phone);
         }
     }
 }

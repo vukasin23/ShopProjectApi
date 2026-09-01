@@ -28,7 +28,7 @@ namespace ShopProject.Implementation
 
         public TResult HandleQuery<TSearch, TResult>(IQuery<TSearch, TResult> query, TSearch search)
         {
-            HandleActorUseCase(query);
+            //HandleActorUseCase(query);
             //_logger.Log(_actor, query, search);
             var result = query.Execute(search);
             return result;
