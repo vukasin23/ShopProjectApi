@@ -28,11 +28,12 @@ namespace ShopProject.Tests.Validators
 
             var dto = new AddressDto
             {
-                UserId = 10,
+                UserId = 3,
                 Street = "Knez Mihailova 18",
                 City = "Belgrade",
                 ZipCode = "11000",
                 Country = "Serbia",
+                State = "Zeleni venac"
             };
 
             var result = validator.TestValidate(dto);
@@ -49,11 +50,13 @@ namespace ShopProject.Tests.Validators
 
             var dto = new AddressDto
             {
-                UserId = 10,
+                UserId = 2,
                 Street = "Knez Mihailova 18",
                 City = "Belgrade",
                 ZipCode = "11000",
                 Country = "Serbia",
+                State = "Zeleni venac"
+                
             };
 
             var result = validator.TestValidate(dto);

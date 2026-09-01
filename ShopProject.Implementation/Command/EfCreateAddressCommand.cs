@@ -33,6 +33,7 @@ namespace ShopProject.Implementation.Command
                 Street = request.Street,
                 City = request.City,
                 ZipCode = request.ZipCode,
+                State = request.State,
                 Country = request.Country,
                 CreatedAt = request.CreatedAt,
                 UpdatedAt = request.UpdatedAt
