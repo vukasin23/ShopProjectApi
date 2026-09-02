@@ -42,7 +42,7 @@ namespace ShopProject.Tests.Validators
         }
 
         [Fact]
-        public void Valide_WhenUserDoesNotExist_ShouldHaveValidationError() {
+        public void Validate_WhenUserDoesNotExist_ShouldHaveValidationError() {
             //Arrange
             var context = new ShopProjectContext();
 
@@ -64,5 +64,28 @@ namespace ShopProject.Tests.Validators
             result.ShouldHaveValidationErrorFor(x => x.UserId);
         }
 
+        [Fact]
+        public void Validate_WhenZipCodeIsInvalid_ShouldHaveValidationError()
+        {
+            //Arrange
+            var context = new ShopProjectContext();
+
+            var validator = new CreateAddressValidator(context);
+
+            var dto = new AddressDto
+            {
+                UserId = 2,
+                Street = "Knez Mihailova 18",
+                City = "Belgrade",
+                ZipCode = "11000312",
+                Country = "Serbia",
+                State = "Zeleni venac"
+
+            };
+
+            var result = validator.TestValidate(dto);
+
+            result.ShouldHaveValidationErrorFor(x => x.ZipCode);
+        }
     }
 }
