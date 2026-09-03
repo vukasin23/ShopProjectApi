@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ShopProject.Application.DataTransfer
 {
-    internal class CouponDto
+    public class CouponDto
     {
+        public string Code { get; set; }
+        public int DiscountAmount { get; set; }
+        public DateTime ExpiryDate { get; set; }
     }
 }

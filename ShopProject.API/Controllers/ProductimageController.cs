@@ -9,44 +9,45 @@ namespace ShopProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CouponController : ControllerBase
+    public class ProductimageController : ControllerBase
     {
+
         private readonly UseCaseHandler _handler;
 
-        public CouponController(UseCaseHandler handler)
+        public ProductimageController(UseCaseHandler handler)
         {
             _handler = handler;
         }
 
-        // GET: api/<CouponController>
+        // GET: api/<ProductimageController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<CouponController>/5
+        // GET api/<ProductimageController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<CouponController>
+        // POST api/<ProductimageController>
         [HttpPost]
-        public IActionResult Post([FromBody] CouponDto request, [FromServices] ICreateCouponCommand command)
+        public IActionResult Post([FromBody] ProductImageDto request, [FromServices] ICreateProductImageCommand command)
         {
             _handler.HandleCommand(command, request);
             return Ok();
         }
 
-        // PUT api/<CouponController>/5
+        // PUT api/<ProductimageController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CouponController>/5
+        // DELETE api/<ProductimageController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

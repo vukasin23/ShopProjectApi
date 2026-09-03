@@ -19,12 +19,18 @@ namespace ShopProject.API.Core
             services.AddTransient<ICreateStoreCommand, EfCreateStoreCommand>();
             services.AddTransient<ICreateAddressCommand, EfCreateAddressCommand>();
             services.AddTransient<ICreateShippingMethods, EfCreateShippingMethodCommand>();
+            services.AddTransient<ICreateCouponCommand, EfCreateCouponCommand>();
+            services.AddTransient<ICreateProductCommand, EfCreateProductCommand>();
+            services.AddTransient<ICreateProductImageCommand, EfCreateProductImageCommand>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
             services.AddTransient<CreateStoreValidator>();
             services.AddTransient<CreateAddressValidator>();
             services.AddTransient<CreateShippingMethodValidator>();
+            services.AddTransient<CreateCouponValidator>();
+            services.AddTransient<CreateProductValidator>();
+            services.AddTransient<CreateProductImageValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 

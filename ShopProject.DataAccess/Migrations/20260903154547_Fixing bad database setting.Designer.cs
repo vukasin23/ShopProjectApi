@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopProject.DataAccess;
 
@@ -11,9 +12,11 @@ using ShopProject.DataAccess;
 namespace ShopProject.DataAccess.Migrations
 {
     [DbContext(typeof(ShopProjectContext))]
-    partial class ShopProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20260903154547_Fixing bad database setting")]
+    partial class Fixingbaddatabasesetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace ShopProject.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("InventoryProduct", b =>
+                {
+                    b.Property<int>("InventoriesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InventoriesId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("InventoryProduct");
+                });
 
             modelBuilder.Entity("ShopProject.Domain.Address", b =>
                 {
@@ -180,9 +198,6 @@ namespace ShopProject.DataAccess.Migrations
                     b.Property<DateTime>("LastUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -190,8 +205,6 @@ namespace ShopProject.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("StoreId");
 
@@ -544,6 +557,21 @@ namespace ShopProject.DataAccess.Migrations
                     b.ToTable("UserUseCases", (string)null);
                 });
 
+            modelBuilder.Entity("InventoryProduct", b =>
+                {
+                    b.HasOne("ShopProject.Domain.Inventory", null)
+                        .WithMany()
+                        .HasForeignKey("InventoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopProject.Domain.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ShopProject.Domain.Address", b =>
                 {
                     b.HasOne("ShopProject.Domain.User", "User")
@@ -597,19 +625,11 @@ namespace ShopProject.DataAccess.Migrations
 
             modelBuilder.Entity("ShopProject.Domain.Inventory", b =>
                 {
-                    b.HasOne("ShopProject.Domain.Product", "Product")
-                        .WithMany("Inventories")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ShopProject.Domain.Store", "Store")
                         .WithMany("Inventories")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("Store");
                 });
@@ -771,8 +791,6 @@ namespace ShopProject.DataAccess.Migrations
             modelBuilder.Entity("ShopProject.Domain.Product", b =>
                 {
                     b.Navigation("CartItems");
-
-                    b.Navigation("Inventories");
 
                     b.Navigation("OrderLines");
 
