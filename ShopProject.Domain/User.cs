@@ -14,17 +14,17 @@ namespace ShopProject.Domain
         public string PasswordHash { get; set; }
         public string Email { get; set; }
 
-        public string PhoneNumber { get; set; } 
-        public virtual IEnumerable<UseCase> UseCases { get; set; }
+        public string PhoneNumber { get; set; }
+        public ICollection<UseCase> UseCases { get; set; } = new List<UseCase>();
 
-        public ICollection<WishlistItem> WishlistItems { get; set; }  
+        public ICollection<WishlistItem> WishlistItems { get; set; } = new List<WishlistItem>();
         public Cart Cart { get; set; }
-        public ICollection<Order> Orders { get; set; }  
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
 
 
-        public ICollection<Address> Addresses { get; set; } 
+        public ICollection<Address> Addresses { get; set; } = new List<Address>();
 
-        public ICollection<UseCaseLog> usecaseLogs { get; set; }
+        public ICollection<UseCaseLog> usecaseLogs { get; set; } = new List<UseCaseLog>();
 
     }
 }

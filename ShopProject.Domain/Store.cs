@@ -16,6 +16,6 @@ namespace ShopProject.Domain
 
         public bool IsActive { get; set; }
 
-        public ICollection<Inventory> Inventories { get; set; } 
+        public ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
     }
 }

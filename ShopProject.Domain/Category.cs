@@ -9,8 +9,8 @@ namespace ShopProject.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
-        public ICollection<Category> Children { get; set; }
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Category> Children { get; set; } = new List<Category>();
         public int? ParentId { get; set; }    
         public Category? Parent { get; set; }
     }

@@ -9,8 +9,8 @@ namespace ShopProject.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<User> Users { get; set; } = new List<User>();
 
-        public ICollection<UseCaseLog> usecaseLogs { get; set; }
+        public ICollection<UseCaseLog> usecaseLogs { get; set; } = new List<UseCaseLog>();
     }
 }

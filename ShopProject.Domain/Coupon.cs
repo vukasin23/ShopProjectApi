@@ -11,6 +11,6 @@ namespace ShopProject.Domain
         public decimal DiscountAmount { get; set; }
         public DateTime ExpiryDate { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

@@ -11,6 +11,6 @@ namespace ShopProject.Domain
         public decimal Price { get; set; }
         public string Description { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

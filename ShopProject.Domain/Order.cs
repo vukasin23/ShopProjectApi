@@ -9,7 +9,7 @@ namespace ShopProject.Domain
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
         public string CustomerName { get; set; }
-        public virtual ICollection<OrderLine> OrderLines { get; set; }
+        public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
         public decimal TotalAmount { get; set; }
 
         public Coupon Coupon { get; set; }

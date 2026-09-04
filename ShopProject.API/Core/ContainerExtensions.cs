@@ -22,6 +22,7 @@ namespace ShopProject.API.Core
             services.AddTransient<ICreateCouponCommand, EfCreateCouponCommand>();
             services.AddTransient<ICreateProductCommand, EfCreateProductCommand>();
             services.AddTransient<ICreateProductImageCommand, EfCreateProductImageCommand>();
+            services.AddTransient<ICreateProductSpecificationCommand, EfCreateProductSpecificationCommand>();   
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
@@ -31,6 +32,7 @@ namespace ShopProject.API.Core
             services.AddTransient<CreateCouponValidator>();
             services.AddTransient<CreateProductValidator>();
             services.AddTransient<CreateProductImageValidator>();
+            services.AddTransient<CreateProductSpecificationValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 

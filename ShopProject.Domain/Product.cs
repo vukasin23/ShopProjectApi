@@ -14,15 +14,15 @@ namespace ShopProject.Domain
 
         public int CategoryId { get; set; } 
 
-        public ICollection<Inventory> Inventories { get; set; } 
+        public ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 
-        public ICollection<OrderLine> OrderLines { get; set; }  
+        public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
-        public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
 
-        public ICollection<ProductSpecification> ProductSpecification { get; set; }
+        public ICollection<ProductSpecification> ProductSpecification { get; set; } = new List<ProductSpecification>();
 
-        public ICollection<CartItem> CartItems { get; set; }
+        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     }
 }

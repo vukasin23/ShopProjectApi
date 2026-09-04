@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShopProject.Domain
+namespace ShopProject.Application.DataTransfer
 {
-    public class ProductSpecification
+    public class ProductSpecificationDto
     {
-        public int Id { get; set; }
         public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
         public string SpecificationName { get; set; }
         public string SpecificationValue { get; set; }
     }
