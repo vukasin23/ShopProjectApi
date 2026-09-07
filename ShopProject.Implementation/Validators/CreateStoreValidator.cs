@@ -1,10 +1,11 @@
-﻿using System;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using ShopProject.Application.DataTransfer;
+using ShopProject.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using FluentValidation;
-using ShopProject.Application.DataTransfer;
-using ShopProject.DataAccess;
 namespace ShopProject.Implementation.Validators
 {
     public class CreateStoreValidator:AbstractValidator<StoreDto>
@@ -26,6 +27,8 @@ namespace ShopProject.Implementation.Validators
             RuleFor(x=>x.Phone).NotEmpty().WithMessage("Store must have a phone number")
                 .Matches(@"^06\d{7,8}$")
                 .WithMessage("Phone number must be Serbian mobile number, example: 0612345678.");
+
+            
         }
     }
 }

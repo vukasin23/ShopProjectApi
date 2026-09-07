@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ShopProject.Application.Command
 {
-    public interface ICreateCartCommand:ICommand<CartDto>
+    public interface ICreateInventoryCommand:ICommand<InventoryDto>
     {
     }
 }
