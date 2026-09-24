@@ -1,6 +1,7 @@
-﻿using FluentValidation.TestHelper;
+using FluentValidation.TestHelper;
 using ShopProject.Application.DataTransfer;
 using ShopProject.DataAccess;
+using ShopProject.Implementation;
 using ShopProject.Implementation.Validators;
 using System;
 using System.Linq;
@@ -10,92 +11,58 @@ namespace ShopProject.Tests.Validators
 {
     public class CreateCartValidatorTests
     {
-        private static CartDto CreateDto()
-        {
-            return new CartDto
-            {
-                UserId = 999999,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            };
-        }
-
         [Fact]
-        public void Validate_WhenUserDoesNotExist_ShouldHaveValidationError()
+        public void Validate_WhenActorDoesNotExist_ShouldHaveValidationError()
         {
             var context = new ShopProjectContext();
-            var validator = new CreateCartValidator(context);
+            var validator = new CreateCartValidator(context, new Actor { Id = 999999 });
 
-            var dto = CreateDto();
+            var result = validator.TestValidate(new CartDto());
 
-            var result = validator.TestValidate(dto);
-
-            result.ShouldHaveValidationErrorFor(x => x.UserId);
+            Assert.False(result.IsValid);
+            Assert.Contains(result.Errors, e => e.ErrorMessage == "User does not exist.");
         }
 
         [Fact]
-        public void Validate_WhenCreatedAtIsEmpty_ShouldHaveValidationError()
+        public void Validate_WhenActorIsUnauthorized_ShouldHaveValidationError()
         {
             var context = new ShopProjectContext();
-            var validator = new CreateCartValidator(context);
+            var validator = new CreateCartValidator(context, new UnauthorizedActor());
 
-            var dto = CreateDto();
-            dto.CreatedAt = default;
+            var result = validator.TestValidate(new CartDto());
 
-            var result = validator.TestValidate(dto);
-
-            result.ShouldHaveValidationErrorFor(x => x.CreatedAt);
+            Assert.False(result.IsValid);
         }
 
         [Fact]
-        public void Validate_WhenCreatedAtIsInFuture_ShouldHaveValidationError()
-        {
-            var context = new ShopProjectContext();
-            var validator = new CreateCartValidator(context);
-
-            var dto = CreateDto();
-            dto.CreatedAt = DateTime.Now.AddMinutes(10);
-
-            var result = validator.TestValidate(dto);
-
-            result.ShouldHaveValidationErrorFor(x => x.CreatedAt);
-        }
-
-        [Fact]
-        public void Validate_WhenUpdatedAtIsBeforeCreatedAt_ShouldHaveValidationError()
-        {
-            var context = new ShopProjectContext();
-            var validator = new CreateCartValidator(context);
-
-            var dto = CreateDto();
-            dto.CreatedAt = DateTime.Now;
-            dto.UpdatedAt = dto.CreatedAt.AddMinutes(-1);
-
-            var result = validator.TestValidate(dto);
-
-            result.ShouldHaveValidationErrorFor(x => x.UpdatedAt);
-        }
-
-        [Fact]
-        public void Validate_WhenUserAlreadyHasCart_ShouldHaveValidationError()
+        public void Validate_WhenActorAlreadyHasCart_ShouldHaveValidationError()
         {
             var context = new ShopProjectContext();
             var existingCart = context.Carts.FirstOrDefault();
 
             Assert.NotNull(existingCart);
 
-            var validator = new CreateCartValidator(context);
+            var validator = new CreateCartValidator(context, new Actor { Id = existingCart!.UserId });
 
-            var dto = new CartDto
-            {
-                UserId = existingCart!.UserId,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now
-            };
-
-            var result = validator.TestValidate(dto);
+            var result = validator.TestValidate(new CartDto());
 
             Assert.False(result.IsValid);
+            Assert.Contains(result.Errors, e => e.ErrorMessage == "This user already has a cart.");
+        }
+
+        [Fact]
+        public void Validate_WhenActorExistsAndHasNoCart_ShouldNotHaveValidationError()
+        {
+            var context = new ShopProjectContext();
+            var userWithoutCart = context.Users.FirstOrDefault(u => !context.Carts.Any(c => c.UserId == u.Id));
+
+            Assert.NotNull(userWithoutCart);
+
+            var validator = new CreateCartValidator(context, new Actor { Id = userWithoutCart!.Id });
+
+            var result = validator.TestValidate(new CartDto());
+
+            Assert.True(result.IsValid);
         }
     }
 }

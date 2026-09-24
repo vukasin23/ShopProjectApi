@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+using FluentValidation;
+using ShopProject.Application;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
 using ShopProject.DataAccess;
@@ -13,11 +14,13 @@ namespace ShopProject.Implementation.Command
     {
         private readonly ShopProjectContext _context;
         private readonly CreateCartValidator _validator;
+        private readonly IApplicationActor _actor;
 
-        public EfCreateCartCommand(ShopProjectContext context, CreateCartValidator validator)
+        public EfCreateCartCommand(ShopProjectContext context, CreateCartValidator validator, IApplicationActor actor)
         {
             _context = context;
             _validator = validator;
+            _actor = actor;
         }
 
         public int Id => 13;
@@ -28,13 +31,15 @@ namespace ShopProject.Implementation.Command
         {
             _validator.ValidateAndThrow(request);
 
-            var Cart = new Domain.Cart
+            var now = DateTime.Now;
+
+            var cart = new Domain.Cart
             {
-                UserId = request.UserId,
-                CreatedAt = request.CreatedAt,
-                UpdatedAt = request.UpdatedAt
+                UserId = _actor.Id,
+                CreatedAt = now,
+                UpdatedAt = now
             };
-            _context.Carts.Add(Cart);
+            _context.Carts.Add(cart);
             _context.SaveChanges();
         }
     }
