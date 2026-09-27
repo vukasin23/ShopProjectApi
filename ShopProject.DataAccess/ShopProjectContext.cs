@@ -16,7 +16,7 @@ namespace ShopProject.DataAccess
 
         public ShopProjectContext()
         {
-            _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopProject;Integrated Security=True";
+            _connectionString = "Server=localhost,1433;Database=ShopDb;User Id=sa;Password=Mojasifra123;TrustServerCertificate=True";
         }
         protected override void OnConfiguring(Microsoft.EntityFrameworkCore.DbContextOptionsBuilder optionsBuilder)
         {

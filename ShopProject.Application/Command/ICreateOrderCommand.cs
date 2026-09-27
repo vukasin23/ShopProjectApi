@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ShopProject.Application.Command
 {
-    internal interface ICreateOrderCommand
+    public interface ICreateOrderCommand
     {
     }
 }
