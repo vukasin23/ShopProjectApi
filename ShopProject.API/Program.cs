@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var settings = new AppSettings();
 
 builder.Configuration.Bind(settings);
+settings.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddSingleton(settings.Jwt);
 

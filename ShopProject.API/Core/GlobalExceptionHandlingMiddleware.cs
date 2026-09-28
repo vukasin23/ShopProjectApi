@@ -56,6 +56,9 @@ namespace ShopProject.API.Core
 
                 //var errorId = _logger.Log(exception, _actor);
 
+                Console.WriteLine("=== UNHANDLED EXCEPTION ===");
+                Console.WriteLine(exception.ToString());
+
                 httpContext.Response.StatusCode = 500;
                 await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - ." });
             }
