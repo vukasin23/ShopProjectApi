@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopProject.DataAccess;
 
@@ -11,9 +12,11 @@ using ShopProject.DataAccess;
 namespace ShopProject.DataAccess.Migrations
 {
     [DbContext(typeof(ShopProjectContext))]
-    partial class ShopProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20260928154404_AddAddressRemoveCustomerNameFromOrder")]
+    partial class AddAddressRemoveCustomerNameFromOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,7 +212,7 @@ namespace ShopProject.DataAccess.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CouponId")
+                    b.Property<int>("CouponId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
@@ -217,6 +220,9 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.Property<int>("ShippingMethodId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -622,7 +628,9 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.HasOne("ShopProject.Domain.Coupon", "Coupon")
                         .WithMany("Orders")
-                        .HasForeignKey("CouponId");
+                        .HasForeignKey("CouponId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ShopProject.Domain.ShippingMethod", "ShippingMethod")
                         .WithMany("Orders")

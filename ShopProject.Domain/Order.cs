@@ -8,20 +8,22 @@ namespace ShopProject.Domain
     {
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public string CustomerName { get; set; }
         public virtual ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
-        public decimal TotalAmount { get; set; }
 
-        public Coupon Coupon { get; set; }
-        public int CouponId { get; set; }   
+        public Coupon? Coupon { get; set; }
+        public int? CouponId { get; set; }
 
-        public ShippingMethod ShippingMethod { get; set; }  
+        public ShippingMethod ShippingMethod { get; set; }
 
         public int ShippingMethodId { get; set; }
 
+        public Address Address { get; set; }
+
+        public int AddressId { get; set; }
+
         public User User { get; set; }
 
-        public int UserId { get; set; } 
+        public int UserId { get; set; }
 
     }
 }

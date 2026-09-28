@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopProject.DataAccess;
 
@@ -11,9 +12,11 @@ using ShopProject.DataAccess;
 namespace ShopProject.DataAccess.Migrations
 {
     [DbContext(typeof(ShopProjectContext))]
-    partial class ShopProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20260928155058_MakeCouponOptionalOnOrder")]
+    partial class MakeCouponOptionalOnOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -217,6 +220,9 @@ namespace ShopProject.DataAccess.Migrations
 
                     b.Property<int>("ShippingMethodId")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
