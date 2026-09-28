@@ -206,12 +206,11 @@ namespace ShopProject.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CouponId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CouponId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -219,13 +218,12 @@ namespace ShopProject.DataAccess.Migrations
                     b.Property<int>("ShippingMethodId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("CouponId");
 
@@ -616,11 +614,15 @@ namespace ShopProject.DataAccess.Migrations
 
             modelBuilder.Entity("ShopProject.Domain.Order", b =>
                 {
+                    b.HasOne("ShopProject.Domain.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ShopProject.Domain.Coupon", "Coupon")
                         .WithMany("Orders")
-                        .HasForeignKey("CouponId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CouponId");
 
                     b.HasOne("ShopProject.Domain.ShippingMethod", "ShippingMethod")
                         .WithMany("Orders")
@@ -633,6 +635,8 @@ namespace ShopProject.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
 
                     b.Navigation("Coupon");
 
