@@ -24,7 +24,5 @@ namespace ShopProject.Domain
 
         public ICollection<Address> Addresses { get; set; } = new List<Address>();
 
-        public ICollection<UseCaseLog> usecaseLogs { get; set; } = new List<UseCaseLog>();
-
     }
 }

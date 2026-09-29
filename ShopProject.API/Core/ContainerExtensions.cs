@@ -3,6 +3,8 @@ using ShopProject.Implementation;
 using ShopProject.Implementation.Command;
 using ShopProject.Implementation.Validators;
 using System.IdentityModel.Tokens.Jwt;
+using ShopProject.Application;
+using ShopProject.Implementation.Logging.UseCases;
 
 namespace ShopProject.API.Core
 {
@@ -29,6 +31,7 @@ namespace ShopProject.API.Core
             services.AddTransient<ICreateCartItemCommand, EfCreateCartItemCommand >();
             services.AddTransient<ICreateOrderCommand, EfCreateOrderCommand>();
             services.AddTransient<ICreateOrderLineCommand, EfCreateOrderLineCommand>();
+            services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();

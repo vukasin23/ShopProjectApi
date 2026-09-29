@@ -8,7 +8,7 @@ namespace ShopProject.Implementation.Logging.UseCases
 {
     public class ConsoleUsecaseLogger : IUseCaseLogger
     {
-        public void Log(IApplicationActor actor, IUseCase useCase, object data)
+        public void Log(IApplicationActor actor, IUseCase useCase)
         {
             throw new NotImplementedException();
         }

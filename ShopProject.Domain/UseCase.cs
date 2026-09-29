@@ -10,7 +10,5 @@ namespace ShopProject.Domain
         public string Name { get; set; }
         public string Description { get; set; }
         public ICollection<User> Users { get; set; } = new List<User>();
-
-        public ICollection<UseCaseLog> usecaseLogs { get; set; } = new List<UseCaseLog>();
     }
 }

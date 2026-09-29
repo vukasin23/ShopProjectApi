@@ -438,13 +438,6 @@ namespace ShopProject.DataAccess.Migrations
                     b.Property<int>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("UseCaseId")
                         .HasColumnType("int");
 
@@ -452,14 +445,7 @@ namespace ShopProject.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UseCaseId");
-
-                    b.HasIndex("userId");
 
                     b.ToTable("UseCaseLogs");
                 });
@@ -697,25 +683,6 @@ namespace ShopProject.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ShopProject.Domain.UseCaseLog", b =>
-                {
-                    b.HasOne("ShopProject.Domain.UseCase", "usecase")
-                        .WithMany("usecaseLogs")
-                        .HasForeignKey("UseCaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ShopProject.Domain.User", "user")
-                        .WithMany("usecaseLogs")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("usecase");
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("ShopProject.Domain.WishlistItem", b =>
                 {
                     b.HasOne("ShopProject.Domain.Product", "Product")
@@ -795,11 +762,6 @@ namespace ShopProject.DataAccess.Migrations
                     b.Navigation("Inventories");
                 });
 
-            modelBuilder.Entity("ShopProject.Domain.UseCase", b =>
-                {
-                    b.Navigation("usecaseLogs");
-                });
-
             modelBuilder.Entity("ShopProject.Domain.User", b =>
                 {
                     b.Navigation("Addresses");
@@ -810,8 +772,6 @@ namespace ShopProject.DataAccess.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("WishlistItems");
-
-                    b.Navigation("usecaseLogs");
                 });
 #pragma warning restore 612, 618
         }

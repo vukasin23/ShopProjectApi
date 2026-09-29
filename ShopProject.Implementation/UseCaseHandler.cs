@@ -11,25 +11,25 @@ namespace ShopProject.Implementation
     public class UseCaseHandler
     {
         private readonly IApplicationActor _actor;
-        //private readonly IUseCaseLogger _logger;
+        private readonly IUseCaseLogger _logger;
 
-        public UseCaseHandler(IApplicationActor actor)
+        public UseCaseHandler(IApplicationActor actor,  IUseCaseLogger logger)
         {
             _actor = actor;
-            //_logger = logger;
+            _logger = logger;
         }
 
         public void HandleCommand<TRequest>(ICommand<TRequest> command, TRequest request)
         {
             //HandleActorUseCase(command);
-            //_logger.Log(_actor, command, request);
+            _logger.Log(_actor, command);
             command.Execute(request);
         }
 
         public TResult HandleQuery<TSearch, TResult>(IQuery<TSearch, TResult> query, TSearch search)
         {
             //HandleActorUseCase(query);
-            //_logger.Log(_actor, query, search);
+            _logger.Log(_actor, query);
             var result = query.Execute(search);
             return result;
         }
