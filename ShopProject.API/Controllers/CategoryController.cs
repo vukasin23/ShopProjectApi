@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
+using ShopProject.Application.Query;
+using ShopProject.Application.Searches;
 using ShopProject.Implementation;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,9 +21,9 @@ namespace ShopProject.API.Controllers
         }
         // GET: api/<CategoryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] CategorySearch search, [FromServices] IGetCategoriesQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // GET api/<CategoryController>/5

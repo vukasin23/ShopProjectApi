@@ -36,6 +36,12 @@ namespace ShopProject.API.Core
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Queries
             services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
+            services.AddTransient<IGetCouponsQuery, EfGetCouponsQuery>();
+            services.AddTransient<IGetCategoriesQuery, EfGetCategoriesQuery>();
+            services.AddTransient<IGetStoresQuery, EfGetStoresQuery>();
+            services.AddTransient<IGetShippingMethodsQuery, EfGetShippingMethodsQuery>();
+            services.AddTransient<IGetAddressesQuery, EfGetAddressesQuery>();
+            services.AddTransient<IGetInventoriesQuery, EfGetInventoriesQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
