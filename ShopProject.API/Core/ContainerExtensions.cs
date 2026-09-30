@@ -1,10 +1,12 @@
 ﻿using ShopProject.Application.Command;
+using ShopProject.Application.Query;
 using ShopProject.Implementation;
 using ShopProject.Implementation.Command;
 using ShopProject.Implementation.Validators;
 using System.IdentityModel.Tokens.Jwt;
 using ShopProject.Application;
 using ShopProject.Implementation.Logging.UseCases;
+using ShopProject.Implementation.Query;
 
 namespace ShopProject.API.Core
 {
@@ -32,6 +34,8 @@ namespace ShopProject.API.Core
             services.AddTransient<ICreateOrderCommand, EfCreateOrderCommand>();
             services.AddTransient<ICreateOrderLineCommand, EfCreateOrderLineCommand>();
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
+            //Queries
+            services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();

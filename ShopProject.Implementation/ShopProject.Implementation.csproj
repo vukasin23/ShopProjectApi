@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Logging\Errors\" />
-    <Folder Include="Query\" />
   </ItemGroup>
 
   <ItemGroup>

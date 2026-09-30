@@ -26,12 +26,12 @@ namespace ShopProject.Implementation
             command.Execute(request);
         }
 
-        public TResult HandleQuery<TSearch, TResult>(IQuery<TSearch, TResult> query, TSearch search)
+        public PagedResponse<TData> HandleQuery<TSearch, TData>(IQuery<TSearch, TData> query, TSearch search)
+            where TSearch : PagedSearch
         {
             //HandleActorUseCase(query);
             _logger.Log(_actor, query);
-            var result = query.Execute(search);
-            return result;
+            return query.Execute(search);
         }
         private void HandleActorUseCase(IUseCase useCase)
         {

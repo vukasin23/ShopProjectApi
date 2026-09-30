@@ -4,8 +4,8 @@ using System.Text;
 
 namespace ShopProject.Application
 {
-    public interface IQuery<TSearch, TResult>: IUseCase
+    public interface IQuery<TSearch, TData> : IUseCase where TSearch : PagedSearch
     {
-        TResult Execute(TSearch search);
+        PagedResponse<TData> Execute(TSearch search);
     }
 }
