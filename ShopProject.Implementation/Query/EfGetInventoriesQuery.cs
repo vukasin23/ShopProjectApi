@@ -16,7 +16,7 @@ public class EfGetInventoriesQuery:IGetInventoriesQuery
     }
     public PagedResponse<InventoryResponse> Execute(InventorySearch search)
     {
-        var query = _context.Inventories.AsQueryable();
+        var query = _context.Inventories.Where(x => !x.Product.IsDeleted);
         if (search.ProductId.HasValue)
         {
             query = query.Where(x => x.ProductId == search.ProductId);

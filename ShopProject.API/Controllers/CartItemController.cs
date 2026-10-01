@@ -23,5 +23,12 @@ namespace ShopProject.API.Controllers
             _handler.HandleCommand(command, request);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id, [FromServices] IDeleteCartItemCommand command)
+        {
+            _handler.HandleCommand(command, id);
+            return NoContent();
+        }
     }
 }

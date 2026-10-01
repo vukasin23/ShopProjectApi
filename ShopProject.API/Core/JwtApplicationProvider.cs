@@ -16,7 +16,7 @@ namespace ShopProject.API.Core
 
         public IApplicationActor GetActor()
         {
-            Console.WriteLine("Ovo je header:" + authorizationHeader);
+
             if(string.IsNullOrEmpty(authorizationHeader) || string.IsNullOrWhiteSpace(authorizationHeader))
             {
                 return new UnauthorizedActor();

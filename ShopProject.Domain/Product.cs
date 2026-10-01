@@ -14,6 +14,8 @@ namespace ShopProject.Domain
 
         public int CategoryId { get; set; } 
 
+        public bool IsDeleted { get; set; }
+
         public ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 
         public ICollection<OrderLine> OrderLines { get; set; } = new List<OrderLine>();

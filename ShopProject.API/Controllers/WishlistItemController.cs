@@ -47,8 +47,10 @@ namespace ShopProject.API.Controllers
 
         // DELETE api/<WishlistItemController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteWishlistItemCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }

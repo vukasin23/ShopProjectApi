@@ -6,6 +6,8 @@ using ShopProject.Application;
 using ShopProject.DataAccess;
 using ShopProject.Implementation;
 using System.Text;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 var settings = new AppSettings();
@@ -18,6 +20,35 @@ builder.Services.AddSingleton(settings.Jwt);
 builder.Services.AddTransient<ShopProjectContext>(x => new ShopProjectContext(settings.ConnectionString));
 builder.Services.AddUseCases();
 builder.Services.AddHttpContextAccessor();
+
+//Rate limiting 
+
+
+var tokenPolicy = "token";
+var myOptions = new MyRateLimitOptions();
+builder.Configuration.GetSection(MyRateLimitOptions.MyRateLimit).Bind(myOptions);
+
+builder.Services.AddRateLimiter(limiter =>
+{
+    limiter.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    // Svaka IP adresa dobija svoju kofu sa zetonima.
+    limiter.AddPolicy(tokenPolicy, httpContext =>
+        RateLimitPartition.GetTokenBucketLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = myOptions.TokenLimit,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = myOptions.QueueLimit,
+                ReplenishmentPeriod = TimeSpan.FromSeconds(myOptions.ReplenishmentPeriod),
+                TokensPerPeriod = myOptions.TokensPerPeriod,
+                AutoReplenishment = myOptions.AutoReplenishment
+            }));
+});
+
+
+
 builder.Services.AddTransient<ITokenStorage, InMemoryTokenStorage>();
 
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
@@ -102,15 +133,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 
 app.MapControllers();
 
 app.Run();
 
 
-
-
-
-//Komande za git 
-
-//Git status, git add ., git commit -m "poruka", git push 

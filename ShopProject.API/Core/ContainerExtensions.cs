@@ -33,6 +33,17 @@ namespace ShopProject.API.Core
             services.AddTransient<ICreateCartItemCommand, EfCreateCartItemCommand >();
             services.AddTransient<ICreateOrderCommand, EfCreateOrderCommand>();
             services.AddTransient<ICreateOrderLineCommand, EfCreateOrderLineCommand>();
+            services.AddTransient<IDeleteCartItemCommand, EfDeleteCartItemCommand>();
+            services.AddTransient<IDeleteWishlistItemCommand, EfDeleteWishlistItemCommand>();
+            services.AddTransient<IDeleteCategoryCommand, EfDeleteCategoryCommand>();
+            services.AddTransient<IDeleteStoreCommand, EfDeleteStoreCommand>();
+            services.AddTransient<IDeleteShippingMethodCommand, EfDeleteShippingMethodCommand>();
+            services.AddTransient<IDeleteCouponCommand, EfDeleteCouponCommand>();
+            services.AddTransient<IDeleteProductImageCommand, EfDeleteProductImageCommand>();
+            services.AddTransient<IDeleteProductSpecificationCommand, EfDeleteProductSpecificationCommand>();
+            services.AddTransient<IDeleteInventoryCommand, EfDeleteInventoryCommand>();
+            services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
+            services.AddTransient<IDeleteAddressCommand, EfDeleteAddressCommand>();
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Queries
             services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
@@ -52,7 +63,6 @@ namespace ShopProject.API.Core
             services.AddTransient<CreateProductValidator>();
             services.AddTransient<CreateProductImageValidator>();
             services.AddTransient<CreateProductSpecificationValidator>();
-            services.AddTransient<CreateProductImageValidator>();
             services.AddTransient<CreateInventoryValidator>();
             services.AddTransient<CreateWishlistItemValidator>();
             services.AddTransient<CreateCartValidator>();

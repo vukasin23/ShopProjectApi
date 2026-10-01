@@ -1,4 +1,5 @@
 ﻿using ShopProject.Application;
+using ShopProject.Application.Exceptions;
 using FluentValidation;
 
 namespace ShopProject.API.Core
@@ -39,20 +40,19 @@ namespace ShopProject.API.Core
                     return;
                 }
 
-                //if (exception is EntityNotFoundException)
-                //{
-                //    httpContext.Response.StatusCode = 404;
-                //    return;
-                //}
+                if (exception is EntityNotFoundException notFound)
+                {
+                    httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+                    await httpContext.Response.WriteAsJsonAsync(new { error = notFound.Message });
+                    return;
+                }
 
-                //if (exception is ConflictException c)
-                //{
-                //    httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
-                //    var body = new { error = c.Message };
-
-                //    await httpContext.Response.WriteAsJsonAsync(body);
-                //    return;
-                //}
+                if (exception is ConflictException conflict)
+                {
+                    httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+                    await httpContext.Response.WriteAsJsonAsync(new { error = conflict.Message });
+                    return;
+                }
 
                 //var errorId = _logger.Log(exception, _actor);
 

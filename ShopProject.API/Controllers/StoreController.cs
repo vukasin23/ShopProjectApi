@@ -51,8 +51,10 @@ namespace ShopProject.API.Controllers
 
         // DELETE api/<StoreController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteStoreCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }

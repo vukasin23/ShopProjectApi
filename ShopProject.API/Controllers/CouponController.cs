@@ -50,8 +50,10 @@ namespace ShopProject.API.Controllers
 
         // DELETE api/<CouponController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteCouponCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }

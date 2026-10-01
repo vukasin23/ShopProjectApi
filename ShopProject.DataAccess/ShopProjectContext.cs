@@ -57,6 +57,10 @@ namespace ShopProject.DataAccess
                 .WithMany()
                 .HasForeignKey(o => o.AddressId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            
+            modelBuilder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<Address>().HasQueryFilter(a => !a.IsDeleted);
         }
 
         public DbSet<User> Users { get; set; }

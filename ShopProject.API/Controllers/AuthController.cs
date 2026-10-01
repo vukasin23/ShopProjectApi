@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Extensions.Msal;
 using ShopProject.API.Core;
@@ -24,6 +25,7 @@ namespace ShopProject.API.Controllers
 
         // POST api/<AuthController>
         [HttpPost]
+        [EnableRateLimiting("token")]
         public IActionResult Post([FromBody] AuthRequest request )
         {
             string _token = _jwtTokenCreator.Create(request.Email,request.Password);
