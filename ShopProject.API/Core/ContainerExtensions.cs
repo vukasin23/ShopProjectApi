@@ -53,6 +53,7 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetShippingMethodsQuery, EfGetShippingMethodsQuery>();
             services.AddTransient<IGetAddressesQuery, EfGetAddressesQuery>();
             services.AddTransient<IGetInventoriesQuery, EfGetInventoriesQuery>();
+            services.AddTransient<IGetCartsQuery, EfGetCartsQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
