@@ -24,16 +24,16 @@ public class EfGetCartsQuery:IGetCartsQuery
         var query = _context.Carts.Include(c=>c.CartItems).AsQueryable();
         if (search.CartId > 0)
         {
-            query.Where(c=>c.Id == search.CartId);
+            query =query.Where(c=>c.Id == search.CartId);
         }
         if (search.UserId > 0)
         {
-            query.Where(c => c.UserId == search.UserId);
+            query = query.Where(c => c.UserId == search.UserId);
         }
 
         if (search.CartItemsCount > 0)
         {
-            query.Where(c=>c.CartItems.Count >=search.CartItemsCount);
+            query =query.Where(c=>c.CartItems.Count >=search.CartItemsCount);
         }
         
         var totalCount = query.Count();
