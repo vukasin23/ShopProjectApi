@@ -29,12 +29,24 @@ namespace ShopProject.Implementation.Command
         public void Execute(OrderDto request)
         {
             _validator.ValidateAndThrow(request);
-            var cart = _context.Carts.Include(c=>c.CartItems).ThenInclude(ci=>ci.Product).Where(c => c.UserId == _actor.Id).FirstOrDefault();
-            if (cart == null && !cart.CartItems.Any())
+            var cart = _context.Carts.Include(c=>c.CartItems).ThenInclude(ci=>ci.Product).ThenInclude(p => p.Inventories).Where(c => c.UserId == _actor.Id).FirstOrDefault();
+            var coupon = _context.Coupons.Where(c=>c.Id == request.CouponId).First();
+            if (cart == null || !cart.CartItems.Any())
             {
                 throw new ValidationException("Cart not found");
             }
-            var transaction = _context.Database.BeginTransaction();
+            foreach (var item in cart.CartItems)
+            {
+                var inventory = item.Product.Inventories.FirstOrDefault(i => i.Quantity >= item.Quantity);
+
+                if (inventory == null)
+                {
+                    throw new ValidationException("Not enough stock for product");
+                }
+                
+                inventory.Quantity -= item.Quantity;
+                inventory.LastUpdated = DateTime.UtcNow;
+            }
             var order = new Domain.Order
             {
                 UserId = _actor.Id,
@@ -42,6 +54,7 @@ namespace ShopProject.Implementation.Command
                 ShippingMethodId = request.ShippingMethodId,
                 CouponId = request.CouponId,
                 OrderDate = DateTime.Now,
+                TotalPrice = cart.CartItems.Sum(i => i.Product.Price * i.Quantity) * (1-coupon.DiscountAmount/100),
                 OrderLines = cart.CartItems.Select(ci=> new OrderLine()
                 {
                     ProductId = ci.ProductId,
@@ -51,8 +64,9 @@ namespace ShopProject.Implementation.Command
                 }).ToList()
 
             };
+            
             _context.Orders.Add(order);
-
+      
             _context.CartItems.RemoveRange(cart.CartItems);
             _context.SaveChanges();
 

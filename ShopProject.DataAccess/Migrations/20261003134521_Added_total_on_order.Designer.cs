@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopProject.DataAccess;
 
@@ -11,9 +12,11 @@ using ShopProject.DataAccess;
 namespace ShopProject.DataAccess.Migrations
 {
     [DbContext(typeof(ShopProjectContext))]
-    partial class ShopProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20261003134521_Added_total_on_order")]
+    partial class Added_total_on_order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
