@@ -42,6 +42,13 @@ public class EfGetAddressesQuery:IGetAddressesQuery
             {
                 Id = x.Id,
                 UserId = x.UserId,
+                User = new UserResponse
+                {
+                    Id = x.User.Id,
+                    Username = x.User.Username,
+                    FirstName = x.User.FirstName,
+                    LastName = x.User.LastName
+                },
                 Street = x.Street,
                 City = x.City,
                 State = x.State,

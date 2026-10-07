@@ -46,6 +46,13 @@ public class EfGetCartsQuery:IGetCartsQuery
             {
                Id = x.Id,
                UserId = x.UserId,
+               User = new UserResponse
+               {
+                   Id = x.User.Id,
+                   Username = x.User.Username,
+                   FirstName = x.User.FirstName,
+                   LastName = x.User.LastName
+               },
                CartItems = x.CartItems.Select(ci=>new CartItemDto
                {
                    AddedAt = ci.AddedAt,

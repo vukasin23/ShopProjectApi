@@ -84,6 +84,13 @@ public class EfGetOrdersQuery:IGetOrdersQuery
             {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
+                User = new UserResponse
+                {
+                    Id = o.User.Id,
+                    Username = o.User.Username,
+                    FirstName = o.User.FirstName,
+                    LastName = o.User.LastName
+                },
                 TotalPrice = o.TotalPrice,
                 OrderLines = o.OrderLines.Select(ol => new OrderLineDto
                 {
