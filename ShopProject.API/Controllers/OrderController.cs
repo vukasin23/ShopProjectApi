@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
+using ShopProject.Application.Query;
+using ShopProject.Application.Searches;
 using ShopProject.Implementation;
 
 namespace ShopProject.API.Controllers
@@ -18,9 +20,9 @@ namespace ShopProject.API.Controllers
 
         // GET: api/<OrderController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromServices] IGetOrdersQuery query, [FromQuery] OrderSearch search)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // GET api/<OrderController>/5

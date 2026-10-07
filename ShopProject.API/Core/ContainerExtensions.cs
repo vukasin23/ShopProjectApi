@@ -54,6 +54,7 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetAddressesQuery, EfGetAddressesQuery>();
             services.AddTransient<IGetInventoriesQuery, EfGetInventoriesQuery>();
             services.AddTransient<IGetCartsQuery, EfGetCartsQuery>();
+            services.AddTransient<IGetOrdersQuery, EfGetOrdersQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
@@ -69,7 +70,8 @@ namespace ShopProject.API.Core
             services.AddTransient<CreateCartValidator>();
             services.AddTransient<CreateCartItemValidator>();
             services.AddTransient<CreateOrderValidator>();
-            services.AddTransient<CreateOrderLineValidator>();  
+            services.AddTransient<CreateOrderLineValidator>();
+            services.AddTransient<OrderSearchValidator>();
             services.AddTransient<JwtTokenCreator>();
         }
 
