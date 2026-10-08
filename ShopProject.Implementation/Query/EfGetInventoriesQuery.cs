@@ -40,8 +40,11 @@ public class EfGetInventoriesQuery:IGetInventoriesQuery
             .Take(search.PerPage)
             .Select(x => new InventoryResponse
             {
+                Id = x.Id,
                 ProductId = x.ProductId,
+                ProductName = x.Product.Name,
                 StoreId = x.StoreId,
+                StoreName = x.Store.Name,
                 Quantity = x.Quantity,
                 LastUpdated = x.LastUpdated
             })

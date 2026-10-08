@@ -6,4 +6,9 @@ public class EntityNotFoundException : Exception
         : base($"{entityName} with id {id} was not found.")
     {
     }
+    
+    public EntityNotFoundException(string username)
+        : base($"User with this username {username} was not found.")
+    {
+    }
 }

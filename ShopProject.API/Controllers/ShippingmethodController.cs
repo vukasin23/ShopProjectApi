@@ -30,9 +30,9 @@ namespace ShopProject.API.Controllers
 
         // GET api/<ShippingmethodController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetShippingMethodQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query, id));
         }
 
         // POST api/<ShippingmethodController>

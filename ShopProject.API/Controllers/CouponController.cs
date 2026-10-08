@@ -29,9 +29,9 @@ namespace ShopProject.API.Controllers
 
         // GET api/<CouponController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetCouponQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query, id));
         }
 
         // POST api/<CouponController>

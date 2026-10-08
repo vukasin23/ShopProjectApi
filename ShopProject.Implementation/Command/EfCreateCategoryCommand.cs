@@ -29,7 +29,8 @@ namespace ShopProject.Implementation.Command
             var categoryEntity = new Category
             {
                 Name = category.Name,
-                Description = category.Description
+                Description = category.Description,
+                ParentId = category.ParentId
             };
 
             _context.Categories.Add(categoryEntity);

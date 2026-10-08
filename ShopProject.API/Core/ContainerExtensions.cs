@@ -44,7 +44,6 @@ namespace ShopProject.API.Core
             services.AddTransient<IDeleteInventoryCommand, EfDeleteInventoryCommand>();
             services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
             services.AddTransient<IDeleteAddressCommand, EfDeleteAddressCommand>();
-            services.AddTransient<IUpdateCategoryCommand, EfUpdateCategoryCommand>();
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Queries
             services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
@@ -56,11 +55,15 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetInventoriesQuery, EfGetInventoriesQuery>();
             services.AddTransient<IGetCartsQuery, EfGetCartsQuery>();
             services.AddTransient<IGetOrdersQuery, EfGetOrdersQuery>();
-            services.AddTransient<IGetCategoryQuery, EfGetCategoryQuery>();
+            services.AddTransient<IGetStoreQuery, EfGetStoreQuery>();
+            services.AddTransient<IGetShippingMethodQuery, EfGetShippingMethodQuery>();
+            services.AddTransient<IGetInventoryQuery, EfGetInventoryQuery>();
+            services.AddTransient<IGetCouponQuery, EfGetCouponQuery>();
+            services.AddTransient<IGetCategoryQuery,  EfGetCategoryQuery>();   
+            services.AddTransient<IGetUserQuery, EfGetUserQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
-            services.AddTransient<UpdateCategoryValidator>();
             services.AddTransient<CreateStoreValidator>();
             services.AddTransient<CreateAddressValidator>();
             services.AddTransient<CreateShippingMethodValidator>();

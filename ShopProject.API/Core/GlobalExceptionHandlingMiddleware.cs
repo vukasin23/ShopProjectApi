@@ -25,6 +25,7 @@ namespace ShopProject.API.Core
             }
             catch (Exception exception)
             {
+                Console.WriteLine(exception.ToString());
                 if (exception is UnauthorizedAccessException)
                 {
                     httpContext.Response.StatusCode = 401;
@@ -56,11 +57,11 @@ namespace ShopProject.API.Core
 
                 //var errorId = _logger.Log(exception, _actor);
 
-                Console.WriteLine("=== UNHANDLED EXCEPTION ===");
-                Console.WriteLine(exception.ToString());
-
-                httpContext.Response.StatusCode = 500;
-                await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - ." });
+                // Console.WriteLine("=== UNHANDLED EXCEPTION ===");
+                // Console.WriteLine(exception.ToString());
+                //
+                // httpContext.Response.StatusCode = 500;
+                // await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - ." });
             }
         }
     }

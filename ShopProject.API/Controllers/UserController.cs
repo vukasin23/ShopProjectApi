@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
+using ShopProject.Application.Query;
 using ShopProject.Implementation;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,6 +19,7 @@ namespace ShopProject.API.Controllers
             _handler = handler;
         }
 
+
         // GET: api/<UserController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -26,10 +28,10 @@ namespace ShopProject.API.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{username}")]
+        public IActionResult Get(string username, [FromServices]IGetUserQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query,username));
         }
 
         // POST api/<UserController>

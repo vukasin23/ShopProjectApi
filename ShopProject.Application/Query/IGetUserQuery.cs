@@ -2,7 +2,7 @@ using ShopProject.Application.Responses;
 
 namespace ShopProject.Application.Query;
 
-public interface IGetCategoryQuery:IGetByOne<CategoryResponse, int>
+public interface IGetUserQuery:IGetByOne<UserResponse, string>
 {
     
 }

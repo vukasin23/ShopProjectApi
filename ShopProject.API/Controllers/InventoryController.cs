@@ -29,9 +29,9 @@ namespace ShopProject.API.Controllers
 
         // GET api/<InventoryController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetInventoryQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query, id));
         }
 
         // POST api/<InventoryController>

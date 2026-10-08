@@ -7,5 +7,6 @@ namespace ShopProject.Application
     public interface IQuery<TSearch, TData> : IUseCase where TSearch : PagedSearch
     {
         PagedResponse<TData> Execute(TSearch search);
+        
     }
 }
