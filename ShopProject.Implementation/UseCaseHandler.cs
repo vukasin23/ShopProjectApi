@@ -33,6 +33,13 @@ namespace ShopProject.Implementation
             _logger.Log(_actor, query);
             return query.Execute(search);
         }
+        public TResponse HandleQuery<TResponse>(IGetByIdQuery<TResponse> query, int id)
+        {
+            //HandleActorUseCase(query);
+            _logger.Log(_actor, query);
+            return query.Execute(id);
+        }
+
         private void HandleActorUseCase(IUseCase useCase)
         {
             if (!_actor.AllowedUseCases.Contains(useCase.Id))
