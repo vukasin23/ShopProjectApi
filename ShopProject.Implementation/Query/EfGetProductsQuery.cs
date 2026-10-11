@@ -57,12 +57,14 @@ public class EfGetProductsQuery:IGetAllProductsQuery
             .Take(search.PerPage)
             .Select(p => new ProductResponse
             {
+                Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
                 Price = p.Price,
                 Category = p.Category.Name,
                 ImageUrls = p.ProductImages.Select(i => new ProductImageResponse
                 {
+                    Id = i.Id,
                     ProductId = i.ProductId,
                     ImageUrl = i.ImageUrl,
                     AltText = i.AltText,
@@ -70,6 +72,7 @@ public class EfGetProductsQuery:IGetAllProductsQuery
                 }).ToList(),
                 ProductSpecifications = p.ProductSpecification.Select(s => new ProductSpecificationResponse
                 {
+                    Id = s.Id,
                     ProductId = s.ProductId,
                     SpecificationName = s.SpecificationName,
                     SpecificationValue = s.SpecificationValue

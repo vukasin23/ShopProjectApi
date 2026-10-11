@@ -27,8 +27,6 @@ namespace ShopProject.API.Controllers
             return Ok(_handler.HandleQuery(query, search));
         }
 
-        // GET api/<CartController>/5
-        [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";

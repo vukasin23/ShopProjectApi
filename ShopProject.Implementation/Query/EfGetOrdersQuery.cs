@@ -92,9 +92,9 @@ public class EfGetOrdersQuery:IGetOrdersQuery
                     LastName = o.User.LastName
                 },
                 TotalPrice = o.TotalPrice,
-                OrderLines = o.OrderLines.Select(ol => new OrderLineDto
+                OrderLines = o.OrderLines.Select(ol => new OrderLineResponse
                 {
-                    OrderId = ol.OrderId,
+                    Id = ol.Id,
                     ProductId = ol.ProductId,
                     Quantity = ol.Quantity,
                     UnitPrice = ol.UnitPrice,

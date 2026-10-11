@@ -61,6 +61,7 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetCouponQuery, EfGetCouponQuery>();
             services.AddTransient<IGetCategoryQuery,  EfGetCategoryQuery>();   
             services.AddTransient<IGetUserQuery, EfGetUserQuery>();
+            services.AddTransient<IGetWishlistitemsQuery, EfGetWishlistitemsQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();
