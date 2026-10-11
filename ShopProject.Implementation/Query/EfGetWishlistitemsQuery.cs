@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using ShopProject.Application;
 using ShopProject.Application.DataTransfer;
 using ShopProject.Application.Query;
@@ -37,23 +36,23 @@ public class EfGetWishlistitemsQuery:IGetWishlistitemsQuery
             query = query.Where(c => c.Product.CategoryId == search.CategoryId);
         }
 
-        if (string.IsNullOrWhiteSpace(search.ProductName))
+        if (!string.IsNullOrWhiteSpace(search.ProductName))
         {
             query = query.Where(w=>w.Product.Name.Contains(search.ProductName));
         }
 
-        if (string.IsNullOrWhiteSpace(search.CategoryName))
+        if (!string.IsNullOrWhiteSpace(search.CategoryName))
         {
             query = query.Where(w=>w.Product.Category.Name.Contains(search.CategoryName));
         }
 
-        if (string.IsNullOrWhiteSpace(search.UserName))
+        if (!string.IsNullOrWhiteSpace(search.UserName))
         {
             query = query.Where(w=>w.User.Username.Contains(search.UserName));
         }
-
+        var totalCount = query.Count();
         
-        var data = query .Skip((search.PageNumber - 1) * search.PerPage)
+        var data = query.OrderBy(x=>x.Id).Skip((search.PageNumber - 1) * search.PerPage)
             .Take(search.PerPage).Select(x => new WishlistItemResponse
         {
             Id = x.Id,
@@ -64,14 +63,14 @@ public class EfGetWishlistitemsQuery:IGetWishlistitemsQuery
            UserId = x.User.Id,
            UserName = x.User.Username,
         }).ToList();
-        var totalCount = data.Count();
+        
         return new PagedResponse<WishlistItemResponse>
         {
             CurrentPage = search.PageNumber,
             Data = data,
             ItemsPerPage = search.PerPage,
             PagesCount = (int)Math.Ceiling(totalCount / (double)search.PerPage),
-            TotalCount = data.Count()
+            TotalCount = totalCount
         };
     }
 

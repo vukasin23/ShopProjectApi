@@ -29,9 +29,9 @@ namespace ShopProject.API.Controllers
 
         // GET api/<AddressController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetAddresQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query, id));
         }
 
         // POST api/<AddressController>

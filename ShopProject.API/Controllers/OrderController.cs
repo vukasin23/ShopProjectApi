@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ShopProject.Application;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
 using ShopProject.Application.Query;
@@ -25,11 +27,12 @@ namespace ShopProject.API.Controllers
             return Ok(_handler.HandleQuery(query, search));
         }
 
-        // GET api/<OrderController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET api/<OrderController>/profile
+        [Authorize]
+        [HttpGet("profile")]
+        public IActionResult GetProfile([FromServices] IGetProfileOrdersQuery query, [FromQuery] PagedSearch search)
         {
-            return "value";
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // POST api/<OrderController>

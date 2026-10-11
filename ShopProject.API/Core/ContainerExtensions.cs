@@ -62,6 +62,11 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetCategoryQuery,  EfGetCategoryQuery>();   
             services.AddTransient<IGetUserQuery, EfGetUserQuery>();
             services.AddTransient<IGetWishlistitemsQuery, EfGetWishlistitemsQuery>();
+            services.AddTransient<IGetAddresQuery, EfGetAddressQuery>();
+            services.AddTransient<IGetProductQuery, EfGetProductQuery>();
+            services.AddTransient<IGetProfileCartQuery, EfGetProfileCartQuery>();
+            services.AddTransient<IGetProfileOrdersQuery, EfGetProfileOrdersQuery>();
+            services.AddTransient<IGetProfileWishlistitemsQuery, EfGetProfileWishlistitemsQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
             services.AddTransient<CreateCategoryValidator>();

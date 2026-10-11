@@ -29,9 +29,9 @@ namespace ShopProject.API.Controllers
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get([FromServices] IGetProductQuery query,int id)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query,id));
         }
 
         // POST api/<ProductController>
