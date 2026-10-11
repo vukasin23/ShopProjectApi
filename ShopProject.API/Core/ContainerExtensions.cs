@@ -64,6 +64,11 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetWishlistitemsQuery, EfGetWishlistitemsQuery>();
             services.AddTransient<IGetAddresQuery, EfGetAddressQuery>();
             services.AddTransient<IGetProductQuery, EfGetProductQuery>();
+            services.AddTransient<IGetProductImagesQuery, EfGetProductImagesQuery>();
+            services.AddTransient<IGetProductImageQuery, EfGetProductImageQuery>();
+            services.AddTransient<IGetProductSpecificationsQuery, EfGetProductSpecificationsQuery>();
+            services.AddTransient<IGetProductSpecificationQuery, EfGetProductSpecificationQuery>();
+            services.AddTransient<IGetUsersQuery, EfGetUsersQuery>();
             services.AddTransient<IGetProfileCartQuery, EfGetProfileCartQuery>();
             services.AddTransient<IGetProfileOrdersQuery, EfGetProfileOrdersQuery>();
             services.AddTransient<IGetProfileWishlistitemsQuery, EfGetProfileWishlistitemsQuery>();

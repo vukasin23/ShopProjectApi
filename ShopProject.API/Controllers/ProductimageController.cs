@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProject.Application.Command;
 using ShopProject.Application.DataTransfer;
+using ShopProject.Application.Query;
+using ShopProject.Application.Searches;
 using ShopProject.Implementation;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,16 +23,16 @@ namespace ShopProject.API.Controllers
 
         // GET: api/<ProductimageController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] ProductImageSearch search, [FromServices] IGetProductImagesQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // GET api/<ProductimageController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetProductImageQuery query)
         {
-            return "value";
+            return Ok(_handler.HandleGetOne(query, id));
         }
 
         // POST api/<ProductimageController>
