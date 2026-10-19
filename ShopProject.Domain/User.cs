@@ -15,6 +15,8 @@ namespace ShopProject.Domain
         public string Email { get; set; }
 
         public string PhoneNumber { get; set; }
+
+        public bool IsDeleted { get; set; }
         public ICollection<UseCase> UseCases { get; set; } = new List<UseCase>();
 
         public ICollection<WishlistItem> WishlistItems { get; set; } = new List<WishlistItem>();

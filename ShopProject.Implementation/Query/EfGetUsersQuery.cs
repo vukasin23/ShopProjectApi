@@ -20,7 +20,7 @@ public class EfGetUsersQuery:IGetUsersQuery
 
     public PagedResponse<UserResponse> Execute(UserSearch search)
     {
-        var query = _context.Users.AsQueryable();
+        var query = _context.Users.Where(x => !x.IsDeleted);
 
         if (!string.IsNullOrWhiteSpace(search.Username))
         {

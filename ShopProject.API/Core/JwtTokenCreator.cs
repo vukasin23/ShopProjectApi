@@ -22,7 +22,7 @@ namespace ShopProject.API.Core
 
         public string Create(string email, string password)
         {
-            var user = _context.Users.Where(x => x.Email == email).Select(x => new
+            var user = _context.Users.Where(x => x.Email == email && !x.IsDeleted).Select(x => new
             {
                 x.Username,
                 x.PasswordHash,

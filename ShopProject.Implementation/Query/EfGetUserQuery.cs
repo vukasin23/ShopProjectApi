@@ -16,7 +16,7 @@ public class EfGetUserQuery:IGetUserQuery
 
     public UserResponse Execute(string username)
     {
-        var user = _context.Users.FirstOrDefault(u => u.Username.Equals(username));
+        var user = _context.Users.FirstOrDefault(u => u.Username.Equals(username) && !u.IsDeleted);
         Console.WriteLine(user);
         if (user == null)
         {
