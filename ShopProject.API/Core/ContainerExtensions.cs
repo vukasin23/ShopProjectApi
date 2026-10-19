@@ -87,6 +87,7 @@ namespace ShopProject.API.Core
             services.AddTransient<IGetProfileWishlistitemsQuery, EfGetProfileWishlistitemsQuery>();
             //Kreirati komande za --- Addresses, Coupons, Shipping Methods, Products
             //Validators
+            services.AddTransient<RegisterUserValidator>();
             services.AddTransient<CreateCategoryValidator>();
             services.AddTransient<CreateStoreValidator>();
             services.AddTransient<CreateAddressValidator>();

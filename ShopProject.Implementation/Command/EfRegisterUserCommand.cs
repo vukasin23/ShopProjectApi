@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using FluentValidation;
+using ShopProject.Implementation.Validators;
 
 namespace ShopProject.Implementation.Command
 {
@@ -15,10 +17,12 @@ namespace ShopProject.Implementation.Command
 
         public string Name => "Register user using EF";
         private readonly ShopProjectContext _context;
+        private readonly RegisterUserValidator _validator;
 
-        public EfRegisterUserCommand(ShopProjectContext context)
+        public EfRegisterUserCommand(ShopProjectContext context, RegisterUserValidator validator)
         {
             _context = context;
+            _validator = validator;
         }
 
 
@@ -26,7 +30,7 @@ namespace ShopProject.Implementation.Command
         public void Execute(RegisterUserDto request)
         {
             //validator
-
+            _validator.ValidateAndThrow(request);
             //execute registration logic
 
             var user = new Domain.User
