@@ -77,6 +77,7 @@ namespace ShopProject.Implementation.Command
                 ShippingMethodId = request.ShippingMethodId,
                 CouponId = request.CouponId,
                 OrderDate = now,
+                StatusId = Status.Pending,
                 TotalPrice = CalculateTotal(cart.CartItems, coupon, shippingMethodPrice),
                 OrderLines = cart.CartItems.Select(ci=> new OrderLine()
                 {

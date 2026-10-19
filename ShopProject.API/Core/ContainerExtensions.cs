@@ -46,6 +46,17 @@ namespace ShopProject.API.Core
             services.AddTransient<IDeleteAddressCommand, EfDeleteAddressCommand>();
             services.AddTransient<IDeleteOrderLineCommand, EfDeleteOrderLineCommand>();
             services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
+            services.AddTransient<IUpdateCategoryCommand, EfUpdateCategoryCommand>();
+            services.AddTransient<IUpdateStoreCommand, EfUpdateStoreCommand>();
+            services.AddTransient<IUpdateShippingMethodCommand, EfUpdateShippingMethodCommand>();
+            services.AddTransient<IUpdateCouponCommand, EfUpdateCouponCommand>();
+            services.AddTransient<IUpdateInventoryCommand, EfUpdateInventoryCommand>();
+            services.AddTransient<IUpdateProductCommand, EfUpdateProductCommand>();
+            services.AddTransient<IUpdateProductImageCommand, EfUpdateProductImageCommand>();
+            services.AddTransient<IUpdateProductSpecificationCommand, EfUpdateProductSpecificationCommand>();
+            services.AddTransient<IUpdateAddressCommand, EfUpdateAddressCommand>();
+            services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
+            services.AddTransient<IUpdateOrderCommand, EfUpdateOrderCommand>();
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Queries
             services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
@@ -84,6 +95,17 @@ namespace ShopProject.API.Core
             services.AddTransient<CreateProductValidator>();
             services.AddTransient<CreateProductImageValidator>();
             services.AddTransient<CreateProductSpecificationValidator>();
+            services.AddTransient<UpdateCategoryValidator>();
+            services.AddTransient<UpdateStoreValidator>();
+            services.AddTransient<UpdateShippingMethodValidator>();
+            services.AddTransient<UpdateCouponValidator>();
+            services.AddTransient<UpdateInventoryValidator>();
+            services.AddTransient<UpdateProductValidator>();
+            services.AddTransient<UpdateProductImageValidator>();
+            services.AddTransient<UpdateProductSpecificationValidator>();
+            services.AddTransient<UpdateAddressValidator>();
+            services.AddTransient<UpdateUserValidator>();
+            services.AddTransient<UpdateOrderStatusValidator>();
             services.AddTransient<CreateInventoryValidator>();
             services.AddTransient<CreateWishlistItemValidator>();
             services.AddTransient<CreateCartValidator>();

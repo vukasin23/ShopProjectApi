@@ -221,6 +221,9 @@ namespace ShopProject.DataAccess.Migrations
                     b.Property<int>("ShippingMethodId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -234,6 +237,8 @@ namespace ShopProject.DataAccess.Migrations
                     b.HasIndex("CouponId");
 
                     b.HasIndex("ShippingMethodId");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("UserId");
 
@@ -378,6 +383,50 @@ namespace ShopProject.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShippingMethods");
+                });
+
+            modelBuilder.Entity("ShopProject.Domain.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Pending"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Processing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Shipped"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Delivered"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Cancelled"
+                        });
                 });
 
             modelBuilder.Entity("ShopProject.Domain.Store", b =>
@@ -628,6 +677,12 @@ namespace ShopProject.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ShopProject.Domain.Status", "Status")
+                        .WithMany("Orders")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ShopProject.Domain.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
@@ -639,6 +694,8 @@ namespace ShopProject.DataAccess.Migrations
                     b.Navigation("Coupon");
 
                     b.Navigation("ShippingMethod");
+
+                    b.Navigation("Status");
 
                     b.Navigation("User");
                 });
@@ -765,6 +822,11 @@ namespace ShopProject.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("ShopProject.Domain.ShippingMethod", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("ShopProject.Domain.Status", b =>
                 {
                     b.Navigation("Orders");
                 });

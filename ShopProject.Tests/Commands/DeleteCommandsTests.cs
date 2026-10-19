@@ -97,7 +97,8 @@ namespace ShopProject.Tests.Commands
                 AddressId = address.Id,
                 ShippingMethodId = method.Id,
                 CouponId = coupon?.Id,
-                OrderDate = DateTime.Now
+                OrderDate = DateTime.Now,
+                StatusId = Status.Pending
             };
             _context.Orders.Add(order);
             _context.SaveChanges();

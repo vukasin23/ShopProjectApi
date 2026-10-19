@@ -45,8 +45,11 @@ namespace ShopProject.API.Controllers
 
         // PUT api/<StoreController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UpdateStoreDto store, [FromServices] IUpdateStoreCommand command)
         {
+            store.Id = id;
+            _handler.HandleCommand(command, store);
+            return NoContent();
         }
 
         // DELETE api/<StoreController>/5

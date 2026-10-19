@@ -44,8 +44,11 @@ namespace ShopProject.API.Controllers
 
         // PUT api/<CouponController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] UpdateCouponDto coupon, [FromServices] IUpdateCouponCommand command)
         {
+            coupon.Id = id;
+            _handler.HandleCommand(command, coupon);
+            return NoContent();
         }
 
         // DELETE api/<CouponController>/5

@@ -27,5 +27,9 @@ namespace ShopProject.Domain
         
         public decimal TotalPrice { get; set; }
 
+        public Status Status { get; set; }
+
+        public int StatusId { get; set; }
+
     }
 }

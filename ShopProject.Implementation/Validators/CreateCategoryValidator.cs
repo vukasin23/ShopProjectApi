@@ -18,6 +18,8 @@ namespace ShopProject.Implementation.Validators
                 .Must(name => !context.Categories.Any(c => c.Name == name))
                 .WithMessage("Category with this name already exists.");
             RuleFor(x => x.Description)
+                .NotEmpty()
+                .WithMessage("Description is required.")
                 .MaximumLength(500)
                 .WithMessage("Description must have maximum 500 characters.");
 

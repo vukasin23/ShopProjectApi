@@ -84,6 +84,7 @@ public class EfGetOrdersQuery:IGetOrdersQuery
             {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
+                Status = o.Status.Name,
                 User = new UserResponse
                 {
                     Id = o.User.Id,

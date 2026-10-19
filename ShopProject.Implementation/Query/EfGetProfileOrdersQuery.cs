@@ -34,6 +34,7 @@ public class EfGetProfileOrdersQuery:IGetProfileOrdersQuery
             {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
+                Status = o.Status.Name,
                 User = new UserResponse
                 {
                     Id = o.User.Id,

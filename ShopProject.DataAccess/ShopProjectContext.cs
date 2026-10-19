@@ -59,6 +59,19 @@ namespace ShopProject.DataAccess
                 .OnDelete(DeleteBehavior.Restrict);
 
             
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = Status.Pending, Name = "Pending" },
+                new Status { Id = Status.Processing, Name = "Processing" },
+                new Status { Id = Status.Shipped, Name = "Shipped" },
+                new Status { Id = Status.Delivered, Name = "Delivered" },
+                new Status { Id = Status.Cancelled, Name = "Cancelled" });
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Status)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(o => o.StatusId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<Address>().HasQueryFilter(a => !a.IsDeleted);
         }
@@ -79,6 +92,7 @@ namespace ShopProject.DataAccess
         public DbSet<WishlistItem> WishlistItems{ get; set; }
         public DbSet<ShippingMethod> ShippingMethods{ get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Status> Statuses { get; set; }
 
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
     }
