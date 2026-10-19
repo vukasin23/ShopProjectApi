@@ -44,6 +44,7 @@ namespace ShopProject.API.Core
             services.AddTransient<IDeleteInventoryCommand, EfDeleteInventoryCommand>();
             services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
             services.AddTransient<IDeleteAddressCommand, EfDeleteAddressCommand>();
+            services.AddTransient<IDeleteOrderLineCommand, EfDeleteOrderLineCommand>();
             services.AddTransient<IUseCaseLogger, EfUsecaseLogger>();
             //Queries
             services.AddTransient<IGetAllProductsQuery, EfGetProductsQuery>();
