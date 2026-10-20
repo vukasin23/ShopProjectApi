@@ -7,17 +7,13 @@ namespace ShopProject.API.Core
     public class GlobalExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
-        //private IErrorLogger _logger;
-        private IApplicationActor _actor;
 
-        public GlobalExceptionHandlingMiddleware(RequestDelegate next, IApplicationActor actor)
+        public GlobalExceptionHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
-            //_logger = logger;
-            _actor = actor;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext)
+        public async Task InvokeAsync(HttpContext httpContext, IErrorLogger logger, IApplicationActor actor)
         {
             try
             {
@@ -43,25 +39,31 @@ namespace ShopProject.API.Core
 
                 if (exception is EntityNotFoundException notFound)
                 {
-                    httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+                    httpContext.Response.StatusCode = 404;
                     await httpContext.Response.WriteAsJsonAsync(new { error = notFound.Message });
                     return;
                 }
 
                 if (exception is ConflictException conflict)
                 {
-                    httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+                    httpContext.Response.StatusCode = 409;
                     await httpContext.Response.WriteAsJsonAsync(new { error = conflict.Message });
                     return;
                 }
+                
+                Guid? errorId = null;
+                try
+                {
+                    errorId = logger.Log(exception, actor);
+                }
+                catch (Exception logException)
+                {
+                    Console.WriteLine("=== ERROR LOGGING FAILED ===");
+                    Console.WriteLine(logException.ToString());
+                }
 
-                //var errorId = _logger.Log(exception, _actor);
-
-                // Console.WriteLine("=== UNHANDLED EXCEPTION ===");
-                // Console.WriteLine(exception.ToString());
-                //
-                // httpContext.Response.StatusCode = 500;
-                // await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - ." });
+                httpContext.Response.StatusCode = 500;
+                await httpContext.Response.WriteAsJsonAsync(new { Message = $"An unexpected error has occured. Please contact our support with this ID - {errorId}." });
             }
         }
     }

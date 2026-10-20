@@ -6,6 +6,6 @@ namespace ShopProject.Application
 {
     public interface IErrorLogger
     {
-        Guid Log(Exception ex,IApplicationActor _actor);
+        Guid Log(Exception ex,IApplicationActor actor);
     }
 }

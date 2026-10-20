@@ -95,5 +95,7 @@ namespace ShopProject.DataAccess
         public DbSet<Status> Statuses { get; set; }
 
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
+        
+        public DbSet<ErrorLog> ErrorLogs { get; set; } 
     }
 }

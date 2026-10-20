@@ -21,7 +21,7 @@ namespace ShopProject.Implementation
 
         public void HandleCommand<TRequest>(ICommand<TRequest> command, TRequest request)
         {
-            //HandleActorUseCase(command);
+            HandleActorUseCase(command);
             _logger.Log(_actor, command);
             command.Execute(request);
         }
@@ -29,7 +29,7 @@ namespace ShopProject.Implementation
         public PagedResponse<TData> HandleQuery<TSearch, TData>(IQuery<TSearch, TData> query, TSearch search)
             where TSearch : PagedSearch
         {
-            //HandleActorUseCase(query);
+            HandleActorUseCase(query);
             _logger.Log(_actor, query);
             return query.Execute(search);
         }

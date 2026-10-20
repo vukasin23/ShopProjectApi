@@ -5,6 +5,7 @@ using ShopProject.Implementation.Command;
 using ShopProject.Implementation.Validators;
 using System.IdentityModel.Tokens.Jwt;
 using ShopProject.Application;
+using ShopProject.Implementation.Logging.Errors;
 using ShopProject.Implementation.Logging.UseCases;
 using ShopProject.Implementation.Query;
 
@@ -16,7 +17,7 @@ namespace ShopProject.API.Core
         {
             //Ovde ce ici svi use case-ovi
             services.AddTransient<UseCaseHandler>();
-
+            services.AddTransient<IErrorLogger, EfErrorLogger>();
             //Commands
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
