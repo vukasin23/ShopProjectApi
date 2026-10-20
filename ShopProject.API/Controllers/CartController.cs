@@ -44,16 +44,6 @@ namespace ShopProject.API.Controllers
             _handler.HandleCommand(command, request); 
         }
 
-        // PUT api/<CartController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<CartController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
